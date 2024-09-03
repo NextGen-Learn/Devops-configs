@@ -1,0 +1,6 @@
+[submodule "Frontend"]
+	path = Frontend
+	url = git@github.com:NextGen-Learn/Frontend.git
+[submodule "Post-service"]
+	path = Post-service
+	url = git@github.com:NextGen-Learn/Post-service.git

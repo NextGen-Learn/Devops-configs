@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Post-service
+    container_name: post_service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./Post-service:/app
+    ports:
+      - "8000:8000"
+    
+
+  frontend:
+    build: ./Frontend
+    container_name: frontend_nextgenlearn
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
