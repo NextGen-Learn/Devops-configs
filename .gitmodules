@@ -7,3 +7,6 @@
 [submodule "User-service"]
 	path = User-service
 	url = git@github.com:NextGen-Learn/User-service.git
+[submodule "About-setvice"]
+	path = About-setvice
+	url = git@github.com:NextGen-Learn/About-setvice.git
