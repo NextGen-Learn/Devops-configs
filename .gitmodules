@@ -10,3 +10,6 @@
 [submodule "About-setvice"]
 	path = About-setvice
 	url = git@github.com:NextGen-Learn/About-setvice.git
+[submodule "About-service"]
+	path = About-service
+	url = git@github.com:NextGen-Learn/About-service.git
