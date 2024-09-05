@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  backend:
+  backend1:
     build: ./Post-service
     container_name: post_service_nextgenlearn
     command: python manage.py runserver 0.0.0.0:8000
@@ -9,7 +9,16 @@ services:
       - ./Post-service:/app
     ports:
       - "8000:8000"
-    
+
+  backend2:
+    build: ./User-service
+    container_name: user_service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - ./User-service:/app
+    ports:
+      - "8001:8001"
+
 
   frontend:
     build: ./Frontend
