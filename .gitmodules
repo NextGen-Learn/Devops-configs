@@ -4,3 +4,6 @@
 [submodule "Post-service"]
 	path = Post-service
 	url = git@github.com:NextGen-Learn/Post-service.git
+[submodule "User-service"]
+	path = User-service
+	url = git@github.com:NextGen-Learn/User-service.git
