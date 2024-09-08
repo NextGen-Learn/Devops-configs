@@ -13,3 +13,6 @@
 [submodule "About-service"]
 	path = About-service
 	url = git@github.com:NextGen-Learn/About-service.git
+[submodule "Ribbon-service"]
+	path = Ribbon-service
+	url = git@github.com:NextGen-Learn/Ribbon-service.git
