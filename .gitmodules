@@ -19,3 +19,9 @@
 [submodule "Review-service"]
 	path = Review-service
 	url = git@github.com:NextGen-Learn/Review-service.git
+[submodule "Video-service"]
+	path = Video-service
+	url = git@github.com:NextGen-Learn/Video-service.git
+[submodule "Interaction-service"]
+	path = Interaction-service
+	url = git@github.com:NextGen-Learn/Interaction-service.git
