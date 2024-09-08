@@ -54,6 +54,24 @@ services:
       - ./Review-service:/app
     ports:
       - "8003:8003"
+  
+  interaction-service:
+    build: ./Interaction-service
+    container_name: interaction-service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8004
+    volumes:
+      - ./Interaction-service:/app
+    ports:
+      - "8004:8004"
+  
+  video-service:
+    build: ./Video-service
+    container_name: video-service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8005
+    volumes:
+      - ./Video-service:/app
+    ports:
+      - "8005:8005"
 
   about-service:
     build:
