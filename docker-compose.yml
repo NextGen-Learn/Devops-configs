@@ -1,7 +1,17 @@
 version: '3.8'
 
 services:
-  backend1:
+  db:
+    image: postgres:latest
+    container_name: postgres_service_nextgenlearn
+    environment:
+      POSTGRES_DB: ngl
+      POSTGRES_USER: userngl
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432" 
+
+  post-service:
     build: ./Post-service
     container_name: post_service_nextgenlearn
     command: python manage.py runserver 0.0.0.0:8000
@@ -9,8 +19,16 @@ services:
       - ./Post-service:/app
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_NAME=ngl
+      - DATABASE_USER=userngl
+      - DATABASE_PASSWORD=1234
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+    depends_on:
+      - db
 
-  backend2:
+  user-service:
     build: ./User-service
     container_name: user_service_nextgenlearn
     command: python manage.py runserver 0.0.0.0:8001
@@ -18,8 +36,17 @@ services:
       - ./User-service:/app
     ports:
       - "8001:8001"
+    
+  ribbon-service:
+    build: ./User-service
+    container_name: ribbon_service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8002
+    volumes:
+      - ./User-service:/app
+    ports:
+      - "8002:8002"
 
-  backend_flask:
+  about-service:
     build:
       context: ./About-service
       dockerfile: Dockerfile
@@ -39,3 +66,6 @@ services:
       - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  postgres_data:
