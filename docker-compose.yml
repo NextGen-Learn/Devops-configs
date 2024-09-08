@@ -38,13 +38,22 @@ services:
       - "8001:8001"
     
   ribbon-service:
-    build: ./User-service
+    build: ./Ribbon-service
     container_name: ribbon_service_nextgenlearn
     command: python manage.py runserver 0.0.0.0:8002
     volumes:
-      - ./User-service:/app
+      - ./Ribbon-service:/app
     ports:
       - "8002:8002"
+  
+  review-service:
+    build: ./Review-service
+    container_name: review_service_nextgenlearn
+    command: python manage.py runserver 0.0.0.0:8003
+    volumes:
+      - ./Review-service:/app
+    ports:
+      - "8003:8003"
 
   about-service:
     build:
