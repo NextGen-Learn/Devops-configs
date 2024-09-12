@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres:latest
-    container_name: postgres_service_nextgenlearn
+    container_name: postgres_post_service_nextgenlearn
     environment:
       POSTGRES_DB: ngl
       POSTGRES_USER: userngl
@@ -19,14 +19,18 @@ services:
       - ./Post-service:/app
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_NAME=ngl
-      - DATABASE_USER=userngl
-      - DATABASE_PASSWORD=1234
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
     depends_on:
       - db
+
+  user_db:
+    image: postgres:latest
+    container_name: postgres_user_service_nextgenlearn
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: user_user_db
+      POSTGRES_PASSWORD: 'mypassword'
+    ports:
+      - "5435:5432"
 
   user-service:
     build: ./User-service
@@ -36,15 +40,8 @@ services:
       - ./User-service:/app
     ports:
       - "8001:8001"
-    
-  ribbon-service:
-    build: ./Ribbon-service
-    container_name: ribbon_service_nextgenlearn
-    command: python manage.py runserver 0.0.0.0:8002
-    volumes:
-      - ./Ribbon-service:/app
-    ports:
-      - "8002:8002"
+    depends_on:
+      - user_db
   
   review-service:
     build: ./Review-service
@@ -63,7 +60,17 @@ services:
       - ./Interaction-service:/app
     ports:
       - "8004:8004"
-  
+
+  video_db:
+    image: postgres:latest
+    container_name: postgres_video_service_nextgenlearn
+    environment:
+      POSTGRES_DB: video_db
+      POSTGRES_USER: user_video_db
+      POSTGRES_PASSWORD: "mypassword"
+    ports:
+      - "5434:5432"
+
   video-service:
     build: ./Video-service
     container_name: video-service_nextgenlearn
@@ -72,6 +79,8 @@ services:
       - ./Video-service:/app
     ports:
       - "8005:8005"
+    depends_on:
+      - video_db
 
   about-service:
     build:
