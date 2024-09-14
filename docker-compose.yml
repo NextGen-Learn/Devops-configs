@@ -10,6 +10,8 @@ services:
       POSTGRES_PASSWORD: 1234
     ports:
       - "5433:5432" 
+    networks:
+      - backend-network
 
   post-service:
     build: ./Post-service
@@ -21,6 +23,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - backend-network
 
   user_db:
     image: postgres:latest
@@ -31,17 +35,24 @@ services:
       POSTGRES_PASSWORD: 'mypassword'
     ports:
       - "5435:5432"
+    networks:
+      - backend-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   user-service:
     build: ./User-service
     container_name: user_service_nextgenlearn
     command: python manage.py runserver 0.0.0.0:8001
-    volumes:
+    volumes:  
       - ./User-service:/app
     ports:
       - "8001:8001"
     depends_on:
       - user_db
+    networks:
+      - backend-network
+
   
   review-service:
     build: ./Review-service
@@ -51,6 +62,8 @@ services:
       - ./Review-service:/app
     ports:
       - "8003:8003"
+    networks:
+      - backend-network
   
   interaction-service:
     build: ./Interaction-service
@@ -60,6 +73,8 @@ services:
       - ./Interaction-service:/app
     ports:
       - "8004:8004"
+    networks:
+      - backend-network
 
   video_db:
     image: postgres:latest
@@ -70,6 +85,8 @@ services:
       POSTGRES_PASSWORD: "mypassword"
     ports:
       - "5434:5432"
+    networks:
+      - backend-network
 
   video-service:
     build: ./Video-service
@@ -81,6 +98,8 @@ services:
       - "8005:8005"
     depends_on:
       - video_db
+    networks:
+      - backend-network
 
   about-service:
     build:
@@ -88,12 +107,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-      
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
     volumes:
       - ./About-service:/app
+    networks:
+      - backend-network
 
   frontend:
     build: ./Frontend
@@ -102,6 +122,12 @@ services:
       - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
 
 volumes:
   postgres_data:
