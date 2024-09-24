@@ -1,0 +1,24 @@
+[submodule "Frontend"]
+	path = Frontend
+	url = git@github.com:NextGen-Learn/Frontend.git
+[submodule "Post-service"]
+	path = Post-service
+	url = git@github.com:NextGen-Learn/Post-service.git
+[submodule "User-service"]
+	path = User-service
+	url = git@github.com:NextGen-Learn/User-service.git
+[submodule "About-setvice"]
+	path = About-setvice
+	url = git@github.com:NextGen-Learn/About-setvice.git
+[submodule "About-service"]
+	path = About-service
+	url = git@github.com:NextGen-Learn/About-service.git
+[submodule "Review-service"]
+	path = Review-service
+	url = git@github.com:NextGen-Learn/Review-service.git
+[submodule "Video-service"]
+	path = Video-service
+	url = git@github.com:NextGen-Learn/Video-service.git
+[submodule "Interaction-service"]
+	path = Interaction-service
+	url = git@github.com:NextGen-Learn/Interaction-service.git
